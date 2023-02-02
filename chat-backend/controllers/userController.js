@@ -1,5 +1,6 @@
 const { User } = require("../models/userModel");
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken')
 
 exports.getUsers = async (req, res) => {
   try {
@@ -17,6 +18,7 @@ exports.createUser = async (req, res) => {
     const hashedPass = await bcrypt.hash(password, salt);
 
     const user = await User.create({
+      username,
       email,
       password: hashedPass,
       roles: role,

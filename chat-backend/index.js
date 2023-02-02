@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const connect = require('./common/db/mongodb');
+const { userRoutes } = require('./routes/userRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -15,6 +16,8 @@ app.get('/', (req, res) => {
 })
 
 connect()
+
+app.use(userRoutes)
 
 
 app.listen(port, (req, res) => {
