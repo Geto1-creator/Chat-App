@@ -7,8 +7,7 @@ import { Login } from "./components";
 function App() {
   return (
     <BrowserRouter>
-     
-
+    
       <Routes>
         <Route path="/" element={<Login />}></Route>
       </Routes>

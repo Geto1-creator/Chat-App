@@ -4,6 +4,9 @@ import { FcGoogle } from "react-icons/fc";
 
 
 export const Login = () => {
+    
+
+
   return (
     <section class="bg-gray-50 min-h-screen flex items-center justify-center">
     <div class="bg-gray-100 flex shadow-lg max-w-5xl  p-5 rounded-2xl">
