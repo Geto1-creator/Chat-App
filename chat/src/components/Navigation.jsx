@@ -1,9 +1,44 @@
-import '../../index.css'
+import styles from "./assets/css/navigation.module.css";
+import { BsChatSquareDots } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { AiFillRightCircle, AiOutlineClose } from "react-icons/ai";
+import { useState } from "react";
+import { SidebarData } from "./SidebarData";
 
 export const Navigation = () => {
-    return (
+  const [sidebar, setSidebar] = useState(false);
+
+  const showSidebar = () => setSidebar(!sidebar);
+  console.log(SidebarData);
+  return (
+    <>
+      <div className={styles.container}>
         <div>
-            <div >Navigatgion</div>
+          <AiFillRightCircle className={styles.icons} />
         </div>
-    )
-}
+      </div>
+      <nav
+        className={
+          sidebar ? `${styles.navMenu} ${styles.active}` : styles.navMenu
+        }>
+        <ul className={styles.navMenuItems}>
+          <li className={styles.navbarToggle}>
+            <Link to="#" className={styles.menuBars}>
+              <AiOutlineClose />
+            </Link>
+          </li>
+          {SidebarData.map((item, index) => {
+            return (
+              <li key={index} className={styles.options}>
+                <Link to={item.path}>
+                  {item.icon}
+                  <span>{item.title}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </>
+  );
+};
