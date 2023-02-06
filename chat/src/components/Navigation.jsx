@@ -14,7 +14,10 @@ export const Navigation = () => {
     <>
       <div className={styles.container}>
         <div>
-          <AiFillRightCircle className={styles.icons} onClick={() => setSidebar(true)}/>
+          <AiFillRightCircle
+            className={styles.icons}
+            onClick={() => setSidebar(true)}
+          />
         </div>
       </div>
       <nav
@@ -24,15 +27,15 @@ export const Navigation = () => {
         <ul className={styles.navMenuItems}>
           <li className={styles.navbarToggle}>
             <Link to="#" className={styles.menuBars}>
-              <AiOutlineClose onClick={() => setSidebar(false)}/>
+              <AiOutlineClose onClick={() => setSidebar(false)} />
             </Link>
           </li>
-          {SidebarData.map((item, index) => { 
+          {SidebarData.map((item, index) => {
             return (
               <li key={index} className={styles.options}>
                 <Link to={item.path}>
                   {item.icon}
-                  <span>{item.title}</span>
+                  <span className={styles.navTitles}>{item.title}</span>
                 </Link>
               </li>
             );

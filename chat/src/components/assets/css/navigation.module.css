@@ -1,5 +1,5 @@
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .container {
@@ -31,7 +31,6 @@
 .navMenu.active {
   left: 0;
   transition: 350ms;
-
 }
 .options {
   display: flex;
@@ -51,7 +50,6 @@
   align-items: center;
   padding: 0px 16px;
   border-radius: 4px;
-
 }
 .menuBars {
   margin-left: 25px;
@@ -73,7 +71,6 @@
   justify-content: start;
   align-items: center;
 }
-span {
-  margin-left: 16px
+.navTitles {
+  margin-left: 15px;
 }
-

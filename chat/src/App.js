@@ -5,16 +5,19 @@ import { Chats, Login, Navigation } from "./components";
 import { AiOutlineEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { AuthProvider } from "./components/common/Provider/AuthProvider";
+import { ChatProvider } from "./components/common/Provider/ChatProvider";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<Login />}></Route>
-          <Route path="/chats" element={<Chats />}></Route>
-        </Routes>
+        <ChatProvider>
+          <Navigation />
+          <Routes>
+            <Route path="/" element={<Login />}></Route>
+            <Route path="/chats" element={<Chats />}></Route>
+          </Routes>
+        </ChatProvider>
       </AuthProvider>
     </BrowserRouter>
   );
