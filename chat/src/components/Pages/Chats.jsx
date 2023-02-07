@@ -17,14 +17,15 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { Messages } from "../Messages";
+import { ChatContext } from "../common/Provider/ChatProvider";
+import { ChatHeader } from "../ChatHeader";
 
 export const Chats = () => {
   const { user } = useContext(AuthContext);
+  const { data } = useContext(ChatContext);
   const [username, setUsername] = useState("");
   const [userr, setUserr] = useState(null);
   const [err, setErr] = useState(false);
-
-  // console.log(user);
   const navigate = useNavigate();
 
   const handleSearch = async () => {
@@ -97,7 +98,7 @@ export const Chats = () => {
       }
     } catch (err) {}
 
-    setUserr(null);
+    setUserr(null);  
     setUsername("");
   };
 
@@ -123,30 +124,40 @@ export const Chats = () => {
                   </Button>
                 </div>
 
-                <div className={styles.inputContainer}>
+                <div className={styles.findInputContainer}>
                   <input
                     className={styles.findInput}
                     onKeyDown={handleKey}
                     onChange={(e) => setUsername(e.target.value)}
                     type="text"
                     value={username}
-                    placeholder="Find a user"></input>
+                    placeholder="Find a user"
+                  ></input>
                 </div>
                 <hr></hr>
                 {err && <span>{err}</span>}
                 {userr && (
-                  <div
+                  <>
+                     <div
                     className={styles.friendsChatSection}
-                    onClick={handleSelect}>
+                    onClick={handleSelect}
+                  >
                     <img className={styles.proPic} src={userr.photoURL} />
                     <div>
                       <span>{userr.name}</span>
                     </div>
                   </div>
+                <hr></hr>
+                  </>
+               
+                
                 )}
+              
+
+                <Messages />
               </div>
               <div className={styles.chatSection}>
-                <Messages />
+                <ChatHeader/>
                 <div className={styles.inputContainer}>
                   <input className={styles.input} type="text"></input>
                 </div>

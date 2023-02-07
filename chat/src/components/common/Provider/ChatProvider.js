@@ -1,9 +1,4 @@
-import { signInWithPopup, signOut } from "firebase/auth";
 import { createContext, useContext, useEffect, useReducer, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { auth, db, provider } from "../firebase";
-import jwt_decode from "jwt-decode";
-import { doc, setDoc } from "firebase/firestore";
 import { AuthContext } from "./AuthProvider";
 
 export const ChatContext = createContext();
@@ -31,7 +26,7 @@ export const ChatProvider = ({ children }) => {
     }
 
     const [state, dispatch] = useReducer(chatReducer, INITIAL_STATE)
-
+console.log(state)
     const value = {
         data: state,
         dispatch

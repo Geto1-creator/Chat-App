@@ -56,8 +56,8 @@ hr {
   align-items: center;
 }
 .proPic {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border-radius: 30px;
 }
 .nameFont {
@@ -81,9 +81,14 @@ hr {
   bottom: 10px;
   /* right: -100px; */
 }
+.findInputContainer {
+  display: flex;
+  margin-top: 15px;
+}
 .findInput {
   background-color: transparent;
   width: 100%;
+  padding-left: 30px;
 }
 .input {
   width: 900px;
