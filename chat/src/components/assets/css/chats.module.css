@@ -105,3 +105,10 @@ hr {
   justify-content: center;
   margin-left: 10px;
 }
+.sendButton {
+  background-color: gray;
+  /* position: absolute; */
+  border-radius: 5px;
+  padding: 10px;
+  margin-left: 10px;
+}

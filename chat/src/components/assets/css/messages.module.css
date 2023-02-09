@@ -1,24 +1,42 @@
 .Container {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 20px;
   padding-left: 20px;
+  padding-top: 70px;
+  flex-direction: column;
 }
-.userChat {
+.overallContainer {
+    overflow-y: scroll;
+    width: 100%;
+    height: 90%;
+    padding-bottom: 100px;
+}
+.ownerContainer {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding-left: 20px;
+    padding-top: 70px;
+    flex-direction: column;
+
+  }
+.secondLine {
   display: flex;
-  /* flex-direction: column; */
-  gap: 5px;
+  align-items: center;
 }
 .messageBorder {
-  max-width: 700px;
-  margin-left: 10px;
+  max-width: 500px;
+  padding: 10px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: gray;
 }
-.usernameText {
+
+.usernameTexts {
   font-weight: 1000;
   font-size: 16px;
   color: black;
-
 }
 .messageTexts {
   font-weight: 400;
@@ -29,11 +47,4 @@
   width: 60px;
   height: 60px;
   border-radius: 30px;
-}
-.secondLine {
-  display: flex;
-  align-items: center;
-}
-.userChat:hover {
-  background-color: rgb(97, 160, 139);
 }

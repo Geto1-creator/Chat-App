@@ -15,10 +15,14 @@ import {
   where,
   doc,
   getDoc,
+  arrayUnion,
+  Timestamp,
 } from "firebase/firestore";
 import { Messages } from "../Messages";
 import { ChatContext } from "../common/Provider/ChatProvider";
 import { ChatHeader } from "../ChatHeader";
+import { ChatLists } from "../ChatLists";
+import { v4 as uuid } from "uuid";
 
 export const Chats = () => {
   const { user } = useContext(AuthContext);
@@ -26,6 +30,8 @@ export const Chats = () => {
   const [username, setUsername] = useState("");
   const [userr, setUserr] = useState(null);
   const [err, setErr] = useState(false);
+  const [text, setText] = useState("");
+  const [img, setImg] = useState(null);
   const navigate = useNavigate();
 
   const handleSearch = async () => {
@@ -77,7 +83,6 @@ export const Chats = () => {
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
         //Create user chats
-        console.log(user.user_id, userr.uid);
         await updateDoc(doc(db, "userChats", user.user_id), {
           [combinedId + ".userInfo"]: {
             uid: userr.uid,
@@ -98,13 +103,38 @@ export const Chats = () => {
       }
     } catch (err) {}
 
-    setUserr(null);  
+    setUserr(null);
     setUsername("");
   };
 
   // console.log(userr, "friend");
   // console.log(user && user.user_id);
   // console.log(username)
+
+  const handleSend = async () => {
+    if (img) {
+      return;
+    } else {
+      console.log(text, user.user_id);
+      await updateDoc(doc(db, "chats", data.chatId), {
+        messages: arrayUnion({
+          id: uuid(),
+          text,
+          senderId: user.user_id, 
+          date: Timestamp.now(),
+        }),
+      });
+    }
+    console.log(data.user)
+    await updateDoc(doc(db, "userChats", user.user_id), {
+      [data.chatId + ".lastMessage"] : {
+        text
+      },
+      [data.chatId + ".date"] : serverTimestamp(),
+    })
+    setText("");
+    setImg(null);
+  };
   return (
     <div className={styles.container}>
       <div>
@@ -138,28 +168,34 @@ export const Chats = () => {
                 {err && <span>{err}</span>}
                 {userr && (
                   <>
-                     <div
-                    className={styles.friendsChatSection}
-                    onClick={handleSelect}
-                  >
-                    <img className={styles.proPic} src={userr.photoURL} />
-                    <div>
-                      <span>{userr.name}</span>
+                    <div
+                      className={styles.friendsChatSection}
+                      onClick={handleSelect}
+                    >
+                      <img className={styles.proPic} src={userr.photoURL} />
+                      <div>
+                        <span>{userr.name}</span>
+                      </div>
                     </div>
-                  </div>
-                <hr></hr>
+                    <hr></hr>
                   </>
-               
-                
                 )}
-              
 
-                <Messages />
+                <ChatLists />
               </div>
               <div className={styles.chatSection}>
-                <ChatHeader/>
+                <ChatHeader />
+                <Messages />
                 <div className={styles.inputContainer}>
-                  <input className={styles.input} type="text"></input>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                  ></input>
+                  <button className={styles.sendButton} onClick={handleSend}>
+                    Send
+                  </button>
                 </div>
               </div>
             </div>
