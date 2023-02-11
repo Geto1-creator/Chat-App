@@ -1,28 +1,32 @@
+.overallContainer {
+  overflow-y: scroll;
+  width: 100%;
+  height: 90%;
+  padding-bottom: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 .Container {
   width: 100%;
   display: flex;
+  /* padding-left: 20px; */
+  padding-top: 70px;
+  padding-right: 20px;
+  flex-direction: column;
+}
+
+.ownerContainer {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
   padding-left: 20px;
   padding-top: 70px;
   flex-direction: column;
 }
-.overallContainer {
-    overflow-y: scroll;
-    width: 100%;
-    height: 90%;
-    padding-bottom: 100px;
-}
-.ownerContainer {
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
-    padding-left: 20px;
-    padding-top: 70px;
-    flex-direction: column;
-
-  }
 .secondLine {
   display: flex;
   align-items: center;
+  gap: 10px
 }
 .messageBorder {
   max-width: 500px;
@@ -30,6 +34,15 @@
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  background-color: gray;
+}
+
+.ownerMessageBorder {
+  max-width: 500px;
+  padding: 10px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
   background-color: gray;
 }
 

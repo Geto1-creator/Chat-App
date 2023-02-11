@@ -5,7 +5,7 @@ import { ChatContext } from './common/Provider/ChatProvider'
 
 export const ChatHeader = () => {
     const {data} = useContext(ChatContext)
-    console.log(data)
+    // console.log(data)
     return (
         <div className={styles.Container}>
             <div className={styles.userSection}>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react"; 
 import { AuthContext } from "../common/Provider/AuthProvider";
 import styles from "../assets/css/chats.module.css";
 import Button from "react-bootstrap/Button";
@@ -32,6 +32,7 @@ export const Chats = () => {
   const [err, setErr] = useState(false);
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
+  const ref = useRef()
   const navigate = useNavigate();
 
   const handleSearch = async () => {
@@ -100,6 +101,8 @@ export const Chats = () => {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
+      } else {
+
       }
     } catch (err) {}
 
@@ -112,26 +115,33 @@ export const Chats = () => {
   // console.log(username)
 
   const handleSend = async () => {
-    if (img) {
-      return;
-    } else {
-      console.log(text, user.user_id);
-      await updateDoc(doc(db, "chats", data.chatId), {
-        messages: arrayUnion({
-          id: uuid(),
-          text,
-          senderId: user.user_id, 
-          date: Timestamp.now(),
-        }),
-      });
+    if(text) {
+      if (img) {
+        return;
+      } else {
+        // console.log(text, user.user_id);
+        await updateDoc(doc(db, "chats", data.chatId), {
+          messages: arrayUnion({
+            id: uuid(),
+            text,
+            senderId: user.user_id, 
+            date: Timestamp.now(),
+  
+          }),
+        });
+  
+    
+      }
+  
+      console.log(data.user)
+      await updateDoc(doc(db, "userChats", user.user_id), {
+        [data.chatId + ".lastMessage"] : {
+          text
+        },
+        [data.chatId + ".date"] : serverTimestamp(),
+      })
     }
-    console.log(data.user)
-    await updateDoc(doc(db, "userChats", user.user_id), {
-      [data.chatId + ".lastMessage"] : {
-        text
-      },
-      [data.chatId + ".date"] : serverTimestamp(),
-    })
+   
     setText("");
     setImg(null);
   };

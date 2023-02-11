@@ -12,9 +12,7 @@ export const ChatLists = () => {
 
   useEffect(() => {
     const getChats = () => {
-
       const unsub = onSnapshot(doc(db, "userChats", user.user_id), (doc) => {
-       
         setChats(doc.data());
       });
 
@@ -29,33 +27,35 @@ export const ChatLists = () => {
   const handleSelect = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
   };
-
-  
+console.log(chats)
   return (
     <div className={styles.Container}>
-      {chats && Object.entries(chats)?.sort((a, b) => b[1].date - a[1].date).map((chat) => {
-
-        return (
-          <div
-            className={styles.userChat}
-            key={chat[1]}
-            onClick={() => handleSelect(chat[1].userInfo)}
-          >
-            <img
-              className={styles.userImg}
-              src={chat[1].userInfo.photoURL}
-            ></img>
-            <div className={styles.messageBorder}>
-              <span className={styles.usernameText}>
-                {chat[1].userInfo.name}
-              </span>
-              <span className={styles.messageTexts}>
-                {chat[1].lastMessage?.text}
-              </span>
-            </div>
-          </div>
-        );
-      })}
+      {chats &&
+        Object.entries(chats)
+          ?.sort((a, b) => b[1].date - a[1].date)
+          .map((chat) => {
+          
+            return (
+              <div
+                className={styles.userChat}
+                key={chat[1]}
+                onClick={() => handleSelect(chat[1].userInfo)}
+              >
+                <img
+                  className={styles.userImg}
+                  src={chat[1].userInfo.photoURL}
+                ></img>
+                <div className={styles.messageBorder}>
+                  <span className={styles.usernameText}>
+                    {chat[1].userInfo.name}
+                  </span>
+                  <span className={styles.messageTexts}>
+                    {chat[1].lastMessage?.text}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
     </div>
   );
 };
