@@ -1,10 +1,12 @@
-import { useContext, useRef, useState } from "react"; 
+import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../common/Provider/AuthProvider";
 import styles from "../assets/css/chats.module.css";
 import Button from "react-bootstrap/Button";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, db } from "../common/firebase";
 import { useNavigate } from "react-router-dom";
+import { RiImage2Fill, RiSendPlaneFill } from "react-icons/ri";
+import { AiOutlineSearch } from "react-icons/ai";
 import {
   collection,
   getDocs,
@@ -32,7 +34,7 @@ export const Chats = () => {
   const [err, setErr] = useState(false);
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
-  const ref = useRef()
+  const ref = useRef();
   const navigate = useNavigate();
 
   const handleSearch = async () => {
@@ -102,7 +104,6 @@ export const Chats = () => {
           [combinedId + ".date"]: serverTimestamp(),
         });
       } else {
-
       }
     } catch (err) {}
 
@@ -115,7 +116,7 @@ export const Chats = () => {
   // console.log(username)
 
   const handleSend = async () => {
-    if(text) {
+    if (text) {
       if (img) {
         return;
       } else {
@@ -124,24 +125,21 @@ export const Chats = () => {
           messages: arrayUnion({
             id: uuid(),
             text,
-            senderId: user.user_id, 
+            senderId: user.user_id,
             date: Timestamp.now(),
-  
           }),
         });
-  
-    
       }
-  
-      console.log(data.user)
+
+      console.log(data.user);
       await updateDoc(doc(db, "userChats", user.user_id), {
-        [data.chatId + ".lastMessage"] : {
-          text
+        [data.chatId + ".lastMessage"]: {
+          text,
         },
-        [data.chatId + ".date"] : serverTimestamp(),
-      })
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
     }
-   
+
     setText("");
     setImg(null);
   };
@@ -152,7 +150,7 @@ export const Chats = () => {
           <>
             <div className={styles.chatContainer}>
               <div className={styles.friendsSection}>
-                <div className={styles.mySection}>
+                {/* <div className={styles.mySection}>
                   <img className={styles.proPic} src={user.picture}></img>
                   <div className={styles.nameCont}>
                     <span className={styles.nameFont}>{user.name}</span>
@@ -162,17 +160,17 @@ export const Chats = () => {
                   <Button className={styles.logout} onClick={logOut}>
                     Logout
                   </Button>
-                </div>
+                </div> */}
 
                 <div className={styles.findInputContainer}>
+                  <AiOutlineSearch className={styles.searchIcon} />
                   <input
                     className={styles.findInput}
                     onKeyDown={handleKey}
                     onChange={(e) => setUsername(e.target.value)}
                     type="text"
                     value={username}
-                    placeholder="Find a user"
-                  ></input>
+                    placeholder="Find a user"></input>
                 </div>
                 <hr></hr>
                 {err && <span>{err}</span>}
@@ -180,8 +178,7 @@ export const Chats = () => {
                   <>
                     <div
                       className={styles.friendsChatSection}
-                      onClick={handleSelect}
-                    >
+                      onClick={handleSelect}>
                       <img className={styles.proPic} src={userr.photoURL} />
                       <div>
                         <span>{userr.name}</span>
@@ -197,15 +194,16 @@ export const Chats = () => {
                 <ChatHeader />
                 <Messages />
                 <div className={styles.inputContainer}>
+                  <RiImage2Fill className={styles.imgIcon} />
                   <input
                     className={styles.input}
                     type="text"
                     value={text}
-                    onChange={(e) => setText(e.target.value)}
-                  ></input>
-                  <button className={styles.sendButton} onClick={handleSend}>
-                    Send
-                  </button>
+                    placeholder="Chatting..."
+                    onChange={(e) => setText(e.target.value)}></input>
+                  {/* <button className={styles.sendButton} onClick={handleSend}> */}
+                  <RiSendPlaneFill className={styles.sendIcon} />
+                  {/* </button> */}
                 </div>
               </div>
             </div>

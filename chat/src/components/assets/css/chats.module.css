@@ -7,7 +7,7 @@ input:focus {
   width: 100vw;
   height: 100vh;
   position: relative;
-  background-color: #bface2;
+
   /* padding-left: 100px; */
   display: grid;
   grid-template-columns: 1fr;
@@ -20,11 +20,11 @@ input:focus {
 }
 .friendsSection {
   width: 30%;
-  background-color: rgb(12, 255, 202);
+  background-color: #bface2;
 }
 .chatSection {
   width: 70%;
-  background-color: aqua;
+  background-color: #ebc7e6;
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -52,7 +52,7 @@ hr {
   padding-bottom: 10px;
   padding-right: 10px;
   display: flex;
-  background-color: aquamarine;
+  background-color: #bface2;
   align-items: center;
 }
 .proPic {
@@ -75,6 +75,7 @@ hr {
   width: 70%;
   display: flex;
   justify-content: center;
+  align-items: center;
   /* padding-left: 20px; */
   margin-top: 15px;
   position: fixed;
@@ -83,7 +84,9 @@ hr {
 }
 .findInputContainer {
   display: flex;
+  position: relative;
   margin-top: 15px;
+  padding-left: 30px;
 }
 .findInput {
   background-color: transparent;
@@ -93,6 +96,7 @@ hr {
 .input {
   width: 900px;
   padding: 8px;
+  border-radius: 20px;
   /* margin-left: 40px; */
 }
 .logout {
@@ -111,4 +115,20 @@ hr {
   border-radius: 5px;
   padding: 10px;
   margin-left: 10px;
+}
+.imgIcon {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}
+.sendIcon {
+  width: 33px;
+  height: 33px;
+  margin-left: 10px;
+}
+.searchIcon {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: -3px;
 }
