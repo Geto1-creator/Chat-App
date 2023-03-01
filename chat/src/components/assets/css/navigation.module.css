@@ -32,6 +32,13 @@
   left: 0;
   transition: 350ms;
 }
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
 .options {
   display: flex;
   justify-content: start;
@@ -60,6 +67,15 @@
 .options a:hover {
   background-color: #1a83ff;
 }
+.logout {
+  background-color: #3c94f8;
+  border-radius: 5px;
+  padding: 5px;
+}
+.logout:hover {
+  background-color: #0261cc;
+  
+}
 .navMenuItems {
   width: 100%;
 }
@@ -73,4 +89,5 @@
 }
 .navTitles {
   margin-left: 15px;
+  color: white;
 }

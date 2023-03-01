@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
         const name = result.user.displayName;
         const email = result.user.email;
         console.log(name, 'name')
-            console.log(result.user.uid)
+        console.log(result.user.uid)
         await setDoc(doc(db, "user", result.user.uid), {
           uid: result.user.uid,
           name,
@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }) => {
   const value = {
     signInWithGoogle,
     user,
+    setUser,
 
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

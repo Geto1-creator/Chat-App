@@ -20,31 +20,27 @@ export const ChatLists = () => {
         unsub();
       };
     };
-
     user.user_id && getChats();
   }, [user.user_id]);
 
   const handleSelect = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
   };
-console.log(chats)
+  console.log(chats);
   return (
     <div className={styles.Container}>
       {chats &&
         Object.entries(chats)
           ?.sort((a, b) => b[1].date - a[1].date)
           .map((chat) => {
-          
             return (
               <div
                 className={styles.userChat}
                 key={chat[1]}
-                onClick={() => handleSelect(chat[1].userInfo)}
-              >
+                onClick={() => handleSelect(chat[1].userInfo)}>
                 <img
                   className={styles.userImg}
-                  src={chat[1].userInfo.photoURL}
-                ></img>
+                  src={chat[1].userInfo.photoURL}></img>
                 <div className={styles.messageBorder}>
                   <span className={styles.usernameText}>
                     {chat[1].userInfo.name}

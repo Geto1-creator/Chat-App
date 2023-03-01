@@ -55,20 +55,6 @@ export const Chats = () => {
     // console.log(e.code)
   };
 
-  const logOut = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        console.log("Sign-out successful");
-        window.localStorage.removeItem("token");
-        navigate("/");
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error);
-      });
-  };
-
   const handleSelect = async () => {
     //Check wheter the group(chats in firestore) exists, if not create
 
@@ -80,8 +66,7 @@ export const Chats = () => {
       const res = await getDoc(doc(db, "chats", combinedId));
       console.log(res);
       console.log(res.exists());
-
-      if (!res.exists()) {
+      if (!res.exists) {
         console.log("orsn");
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
@@ -104,6 +89,22 @@ export const Chats = () => {
           [combinedId + ".date"]: serverTimestamp(),
         });
       } else {
+        await updateDoc(doc(db, "userChats", user.user_id), {
+          [combinedId + ".userInfo"]: {
+            uid: userr.uid,
+            name: userr.name, 
+            photoURL: userr.photoURL,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+        await updateDoc(doc(db, "userChats", userr.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: user.user_id,
+            name: user.name,
+            photoURL: user.picture,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
       }
     } catch (err) {}
 
@@ -202,7 +203,10 @@ export const Chats = () => {
                     placeholder="Chatting..."
                     onChange={(e) => setText(e.target.value)}></input>
                   {/* <button className={styles.sendButton} onClick={handleSend}> */}
-                  <RiSendPlaneFill className={styles.sendIcon} />
+                  <RiSendPlaneFill
+                    className={styles.sendIcon}
+                    onClick={handleSend}
+                  />
                   {/* </button> */}
                 </div>
               </div>
