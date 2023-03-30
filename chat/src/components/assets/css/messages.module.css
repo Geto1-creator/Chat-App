@@ -38,7 +38,7 @@
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  background-color: gray;
+  background-color: #383838;
 }
 
 .ownerMessageBorder {
@@ -51,17 +51,19 @@
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  background-color: gray;
+  background-color: #4eac6d;
 }
 
 .usernameTexts {
   font-weight: 1000;
   font-size: 13px;
-  color: black;
+  font-family: "Work Sans", sans-serif;
+  color: #8f9198;
 }
 .messageTexts {
   font-weight: 400;
   font-size: 13px;
+  font-family: "Work Sans", sans-serif;
   color: white;
 }
 .userImg {

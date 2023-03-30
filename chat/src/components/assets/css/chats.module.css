@@ -7,7 +7,6 @@ input:focus {
   width: 100vw;
   height: 100vh;
   position: relative;
-
   /* padding-left: 100px; */
   display: grid;
   grid-template-columns: 1fr;
@@ -19,12 +18,20 @@ input:focus {
   /* border: 1px solid black; */
 }
 .friendsSection {
-  width: 30%;
-  background-color: #bface2;
+  width: 20%;
+  background-color: #262626;
+  padding-top: 30px;
+  padding-left: 25px;
+}
+.topTitle {
+  font-size: 23px;
+  color: #adb5bd;
+  font-family: "Work Sans", sans-serif;
 }
 .chatSection {
-  width: 70%;
-  background-color: #ebc7e6;
+  width: 80%;
+  background-color: #2e2e2e;
+  background-image: url("https://doot-dark.react.themesbrand.com/static/media/pattern-05.ffd181cdf9a08b200998.png");
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -34,8 +41,9 @@ input:focus {
 .friendsChatSection {
   display: flex;
   align-items: center;
-  padding-left: 20px;
-  text-align: start;
+  margin-top: 10px;
+  gap: 10px;
+  /* text-align: start; */
 }
 hr {
   width: 100%;
@@ -56,8 +64,8 @@ hr {
   align-items: center;
 }
 .proPic {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   border-radius: 30px;
 }
 .nameFont {
@@ -72,32 +80,74 @@ hr {
   height: 90%;
 }
 .inputContainer {
-  width: 70%;
+  width: 80%;
   display: flex;
-  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /* justify-content: center; */
   align-items: center;
-  /* padding-left: 20px; */
+  background-color: rgba(46, 46, 46, 0.5);
+  border: 1px solid #333;
+  backdrop-filter: blur(7px);
   margin-top: 15px;
   position: fixed;
-  bottom: 10px;
-  /* right: -100px; */
+  padding-left: 20px;
+  bottom: 0px;
 }
 .findInputContainer {
   display: flex;
   position: relative;
   margin-top: 15px;
-  padding-left: 30px;
 }
 .findInput {
-  background-color: transparent;
-  width: 100%;
-  padding-left: 30px;
+  /* background-color: transparent; */
+  width: 75%;
+  background-color: #2e2e2e;
+  border-bottom-left-radius: 5px;
+  font-size: 13px;
+  color: #8f9198;
+  font-family: "Work Sans", sans-serif;
+  border-top-left-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 13px;
+}
+.searchButton {
+  width: 50px;
+  background-color: #2e2e2e;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
 }
 .input {
-  width: 900px;
+  width: 90%;
   padding: 8px;
-  border-radius: 20px;
+  border-radius: 10px;
+  background-color: #333333;
+  font-size: 13px;
+  color: #8f9198;
+  padding-top: 12px;
+  padding-bottom: 12px;
   /* margin-left: 40px; */
+}
+.midTitle {
+  font-family: "Work Sans", sans-serif;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #8f9198;
+}
+.sendButton {
+  background-color: #4eac6d;
+  border-color: #4eac6d;
+  display: flex;
+  margin-left: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  /* align-items: center;
+  justify-content: center; */
 }
 .logout {
   width: 50px;
@@ -109,26 +159,20 @@ hr {
   justify-content: center;
   margin-left: 10px;
 }
-.sendButton {
-  background-color: gray;
-  /* position: absolute; */
-  border-radius: 5px;
-  padding: 10px;
-  margin-left: 10px;
+.searchName {
+  font-size: 12px;
+  color: #8f9198;
 }
 .imgIcon {
   width: 35px;
   height: 35px;
+  color: #8f9198;
   margin-right: 10px;
 }
 .sendIcon {
-  width: 33px;
-  height: 33px;
-  margin-left: 10px;
+  font-size: 24px;
 }
 .searchIcon {
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  top: -3px;
+  font-size: 19px;
+  color: #8f9198;
 }

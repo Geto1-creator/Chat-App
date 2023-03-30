@@ -1,13 +1,11 @@
-.Container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding-left: 20px;
-}
+/* */
 .userChat {
   display: flex;
   /* flex-direction: column; */
+  align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 4px;
   gap: 5px;
 }
 .messageBorder {
@@ -18,18 +16,18 @@
 }
 .usernameText {
   font-weight: 1000;
-  font-size: 16px;
-  color: black;
-
+  font-size: 14px;
+  font-family: "Work Sans", sans-serif;
+  color: #adb5bd;
 }
 .messageTexts {
   font-weight: 400;
   font-size: 14px;
-  color: black;
+  color: gray;
 }
 .userImg {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   border-radius: 30px;
 }
 .secondLine {
@@ -37,5 +35,5 @@
   align-items: center;
 }
 .userChat:hover {
-  background-color: rgb(97, 160, 139);
+  background-color: #4eac6d;
 }

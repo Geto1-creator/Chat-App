@@ -9,10 +9,11 @@ export const Messages = () => {
   const [messages, setMessages] = useState([]);
   const { data } = useContext(ChatContext);
   const { user } = useContext(AuthContext);
-  const ref = useRef()
+  const ref = useRef();
 
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
+      console.log("message oorchlogdoh");
       doc.exists() && setMessages(doc.data().messages);
     });
 
@@ -22,15 +23,14 @@ export const Messages = () => {
   }, [data.chatId]);
 
   useEffect(() => {
-    console.log("Scrolled")
-    ref.current?.scrollIntoView({behavior: 'smooth'})
-  }, [messages])
-
+    console.log("Scrolled");
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   console.log(messages);
 
   return (
-    <div className={styles.overallContainer} >
+    <div className={styles.overallContainer}>
       {messages.map((message) => {
         // console.log(message);
         return (
@@ -41,11 +41,10 @@ export const Messages = () => {
               message.senderId === user.user_id
                 ? styles.ownerContainer
                 : styles.Container
-            }
-          >
+            }>
             {message.senderId === user.user_id ? (
               <>
-                <span className={styles.usernameTexts}>{user.name}</span>
+                <span className={styles.usernameTexts}>You</span>
                 <div className={styles.secondLine}>
                   <div className={styles.ownerMessageBorder}>
                     <span className={styles.messageTexts}>{message.text}</span>
@@ -56,8 +55,7 @@ export const Messages = () => {
                       message.senderId === user.user_id
                         ? user.picture
                         : data.user.photoURL
-                    }
-                  ></img>
+                    }></img>
                 </div>
               </>
             ) : (
@@ -70,8 +68,7 @@ export const Messages = () => {
                       message.senderId === user.user_id
                         ? user.picture
                         : data.user.photoURL
-                    }
-                  ></img>
+                    }></img>
                   <div className={styles.messageBorder}>
                     <span className={styles.messageTexts}>{message.text}</span>
                   </div>

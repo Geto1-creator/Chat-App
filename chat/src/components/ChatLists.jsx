@@ -1,4 +1,4 @@
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import styles from "./assets/css/chatlists.module.css";
 import { db } from "./common/firebase";
@@ -11,8 +11,10 @@ export const ChatLists = () => {
   const [chats, setChats] = useState([]);
 
   useEffect(() => {
-    const getChats = () => {
+    console.log("oorclogdoh");
+    const getChats = async () => {
       const unsub = onSnapshot(doc(db, "userChats", user.user_id), (doc) => {
+        console.log(doc.data());
         setChats(doc.data());
       });
 
@@ -20,23 +22,25 @@ export const ChatLists = () => {
         unsub();
       };
     };
-    user.user_id && getChats();
+    getChats();
   }, [user.user_id]);
 
   const handleSelect = (u) => {
+    console.log(u);
     dispatch({ type: "CHANGE_USER", payload: u });
   };
-  console.log(chats);
+
+  // console.log(Object.entries(chats));
   return (
     <div className={styles.Container}>
       {chats &&
         Object.entries(chats)
           ?.sort((a, b) => b[1].date - a[1].date)
-          .map((chat) => {
+          .map((chat, index) => {
             return (
               <div
                 className={styles.userChat}
-                key={chat[1]}
+                key={chat[0]}
                 onClick={() => handleSelect(chat[1].userInfo)}>
                 <img
                   className={styles.userImg}

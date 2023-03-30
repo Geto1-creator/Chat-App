@@ -21,6 +21,7 @@ export const Navigation = () => {
         console.log("Sign-out successful");
         window.localStorage.removeItem("token");
         setUser(null);
+        
         setSidebar(true);
         navigate("/");
       })

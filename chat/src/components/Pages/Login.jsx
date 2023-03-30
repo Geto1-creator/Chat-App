@@ -6,8 +6,6 @@ import { AuthContext } from "../common/Provider/AuthProvider";
 
 export const Login = () => {
   const { signInWithGoogle } = useContext(AuthContext);
-  
-
 
   return (
     <section class="bg-gray-50 min-h-screen flex items-center justify-center">

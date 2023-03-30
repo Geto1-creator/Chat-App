@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db, provider } from "../firebase";
 import jwt_decode from "jwt-decode";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export const AuthContext = createContext();
 
@@ -31,7 +31,12 @@ export const AuthProvider = ({ children }) => {
           email,
           photoURL: result.user.photoURL
         });
-        await setDoc(doc(db, 'userChats', result.user.uid), {})
+        const res = await getDoc(doc(db, "userChats", result.user.uid));
+        console.log(res)
+        if (!res.exists()) {
+          await setDoc(doc(db, 'userChats', result.user.uid), {})
+        }
+
       })
       .catch((err) => {
         console.log(err);

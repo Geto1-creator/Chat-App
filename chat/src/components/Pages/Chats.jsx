@@ -30,7 +30,7 @@ export const Chats = () => {
   const { user } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
   const [username, setUsername] = useState("");
-  const [userr, setUserr] = useState(null);
+  const [userr, setUserr] = useState();
   const [err, setErr] = useState(false);
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
@@ -43,7 +43,7 @@ export const Chats = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(q);
+        console.log(doc.data());
         setUserr(doc.data());
       });
     } catch (err) {
@@ -54,7 +54,7 @@ export const Chats = () => {
     e.code === "Enter" && handleSearch();
     // console.log(e.code)
   };
-
+  console.log(userr);
   const handleSelect = async () => {
     //Check wheter the group(chats in firestore) exists, if not create
 
@@ -63,13 +63,14 @@ export const Chats = () => {
         ? user.user_id + userr.uid
         : userr.uid + user.user_id;
     try {
-      const res = await getDoc(doc(db, "chats", combinedId));
-      console.log(res);
-      console.log(res.exists());
-      if (!res.exists) {
+      const res = await getDoc(doc(db, "userChats", user.user_id));
+      const res2 = await getDoc(doc(db, "chats", combinedId));
+
+      console.log(res.exists(), res2.exists());
+      if (!res.exists() || !res2.exists()) {
         console.log("orsn");
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
-
+        console.log(user.user_id);
         //Create user chats
         await updateDoc(doc(db, "userChats", user.user_id), {
           [combinedId + ".userInfo"]: {
@@ -88,20 +89,13 @@ export const Chats = () => {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
+        console.log("yube");
       } else {
         await updateDoc(doc(db, "userChats", user.user_id), {
           [combinedId + ".userInfo"]: {
             uid: userr.uid,
-            name: userr.name, 
+            name: userr.name,
             photoURL: userr.photoURL,
-          },
-          [combinedId + ".date"]: serverTimestamp(),
-        });
-        await updateDoc(doc(db, "userChats", userr.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: user.user_id,
-            name: user.name,
-            photoURL: user.picture,
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
@@ -111,10 +105,6 @@ export const Chats = () => {
     setUserr(null);
     setUsername("");
   };
-
-  // console.log(userr, "friend");
-  // console.log(user && user.user_id);
-  // console.log(username)
 
   const handleSend = async () => {
     if (text) {
@@ -144,6 +134,7 @@ export const Chats = () => {
     setText("");
     setImg(null);
   };
+
   return (
     <div className={styles.container}>
       <div>
@@ -151,30 +142,21 @@ export const Chats = () => {
           <>
             <div className={styles.chatContainer}>
               <div className={styles.friendsSection}>
-                {/* <div className={styles.mySection}>
-                  <img className={styles.proPic} src={user.picture}></img>
-                  <div className={styles.nameCont}>
-                    <span className={styles.nameFont}>{user.name}</span>
-                    <span className={styles.emailFont}>{user.email}</span>
-                  </div>
-
-                  <Button className={styles.logout} onClick={logOut}>
-                    Logout
-                  </Button>
-                </div> */}
+                <p className={styles.topTitle}>Chats</p>
 
                 <div className={styles.findInputContainer}>
-                  <AiOutlineSearch className={styles.searchIcon} />
                   <input
                     className={styles.findInput}
                     onKeyDown={handleKey}
                     onChange={(e) => setUsername(e.target.value)}
                     type="text"
                     value={username}
-                    placeholder="Find a user"></input>
+                    placeholder="Find a user..."></input>
+                  <button className={styles.searchButton}>
+                    <AiOutlineSearch className={styles.searchIcon} />
+                  </button>
                 </div>
-                <hr></hr>
-                {err && <span>{err}</span>}
+
                 {userr && (
                   <>
                     <div
@@ -182,13 +164,13 @@ export const Chats = () => {
                       onClick={handleSelect}>
                       <img className={styles.proPic} src={userr.photoURL} />
                       <div>
-                        <span>{userr.name}</span>
+                        <span className={styles.searchName}>{userr.name}</span>
                       </div>
                     </div>
                     <hr></hr>
                   </>
                 )}
-
+                <p className={styles.midTitle}>DIRECT MESSAGES</p>
                 <ChatLists />
               </div>
               <div className={styles.chatSection}>
@@ -202,12 +184,12 @@ export const Chats = () => {
                     value={text}
                     placeholder="Chatting..."
                     onChange={(e) => setText(e.target.value)}></input>
-                  {/* <button className={styles.sendButton} onClick={handleSend}> */}
-                  <RiSendPlaneFill
-                    className={styles.sendIcon}
-                    onClick={handleSend}
-                  />
-                  {/* </button> */}
+                  <Button className={styles.sendButton}>
+                    <RiSendPlaneFill
+                      className={styles.sendIcon}
+                      onClick={handleSend}
+                    />
+                  </Button>{" "}
                 </div>
               </div>
             </div>
